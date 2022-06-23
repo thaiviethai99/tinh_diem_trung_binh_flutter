@@ -72,20 +72,26 @@ class _MyHomePageState extends State<MyHomePage> {
                   lableText: "Điểm môn Toán",
                   hintText: "Nhập điểm toán",
                   controller: toanController,
-                  clearMess: 1,
+                  clearMess: (){
+                    _isErrorToan = false;
+                  },
                   errorText: _isErrorToan ? _errorMessToan : null),
               // Textfield : Năm sinh
               inputWidget(
                   lableText: "Điểm môn Văn",
                   hintText: "Nhập điểm môn văn",
                   controller: vanController,
-                  clearMess: 2,
+                  clearMess: (){
+                    _isErrorVan = false;
+                  },
                   errorText: _isErrorVan ? _errorMessVan : null),
               inputWidget(
                   lableText: "Điểm môn Anh",
                   hintText: "Nhập điểm môn Anh",
                   controller: anhController,
-                  clearMess: 3,
+                  clearMess: (){
+                    _isErrorAnh = false;
+                  },
                   errorText: _isErrorAnh ? _errorMessAnh : null),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -134,23 +140,13 @@ class _MyHomePageState extends State<MyHomePage> {
       required String hintText,
       required controller,
       required var errorText,
-      required int clearMess}) {
+      required Function clearMess}) {
     return Container(
         padding: const EdgeInsets.only(top: 10, bottom: 20),
         child: TextField(
           onChanged: (text) {
             setState(() {
-              if (clearMess == 1) {
-                _isErrorToan = false;
-              }
-
-              if (clearMess == 2) {
-                _isErrorVan = false;
-              }
-
-              if (clearMess == 3) {
-                _isErrorAnh = false;
-              }
+              clearMess();
             });
           },
           decoration: InputDecoration(
