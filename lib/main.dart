@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'input_class_widget.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -68,31 +70,17 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: const EdgeInsets.only(right: 20, left: 20, top: 30),
           child: Column(
             children: [
-              inputWidget(
+              InputClassWidget(
                   lableText: "Điểm môn Toán",
                   hintText: "Nhập điểm toán",
                   controller: toanController,
                   clearMess: (){
-                    _isErrorToan = false;
+                    setState(() {
+                      _isErrorToan = false;
+                    });
                   },
                   errorText: _isErrorToan ? _errorMessToan : null),
               // Textfield : Năm sinh
-              inputWidget(
-                  lableText: "Điểm môn Văn",
-                  hintText: "Nhập điểm môn văn",
-                  controller: vanController,
-                  clearMess: (){
-                    _isErrorVan = false;
-                  },
-                  errorText: _isErrorVan ? _errorMessVan : null),
-              inputWidget(
-                  lableText: "Điểm môn Anh",
-                  hintText: "Nhập điểm môn Anh",
-                  controller: anhController,
-                  clearMess: (){
-                    _isErrorAnh = false;
-                  },
-                  errorText: _isErrorAnh ? _errorMessAnh : null),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -146,6 +134,17 @@ class _MyHomePageState extends State<MyHomePage> {
         child: TextField(
           onChanged: (text) {
             setState(() {
+              // if (clearMess == 1) {
+              //   _isErrorToan = false;
+              // }
+
+              // if (clearMess == 2) {
+              //   _isErrorVan = false;
+              // }
+
+              // if (clearMess == 3) {
+              //   _isErrorAnh = false;
+              // }
               clearMess();
             });
           },
@@ -194,77 +193,11 @@ class _MyHomePageState extends State<MyHomePage> {
   void tinhDiem() {
     setState(() {
       var diemToan = toanController.text;
-      var diemVan = vanController.text;
-      var diemAnh = anhController.text;
 
       if (diemToan.isEmpty) {
         _isErrorToan = true;
         _errorMessToan = 'Chưa nhập điểm môn Toán';
         return;
-      }
-
-      if (diemToan.isNotEmpty) {
-        if (!isNumericUsingRegularExpression(diemToan)) {
-          _isErrorToan = true;
-          _errorMessToan = 'Điểm phải là số';
-          return;
-        }
-
-        if (double.parse(diemToan) > 10) {
-          _isErrorToan = true;
-          _errorMessToan = 'Điểm không được lớn hơn 10';
-          return;
-        }
-      }
-
-      if (diemVan.isEmpty) {
-        _isErrorVan = true;
-        _errorMessVan = 'Chưa nhập điểm môn Văn';
-        return;
-      }
-
-      if (diemVan.isNotEmpty) {
-        if (!isNumericUsingRegularExpression(diemVan)) {
-          _isErrorVan = true;
-          _errorMessVan = 'Điểm phải là số';
-          return;
-        }
-
-        if (double.parse(diemVan) > 10) {
-          _isErrorVan = true;
-          _errorMessVan = 'Điểm không được lớn hơn 10';
-          return;
-        }
-      }
-
-      if (diemAnh.isEmpty) {
-        _isErrorAnh = true;
-        _errorMessAnh = 'Chưa nhập điểm môn Anh';
-        return;
-      }
-
-      if (diemAnh.isNotEmpty) {
-        if (!isNumericUsingRegularExpression(diemAnh)) {
-          _isErrorAnh = true;
-          _errorMessAnh = 'Điểm phải là số';
-          return;
-        }
-
-        if (double.parse(diemAnh) > 10) {
-          _isErrorAnh = true;
-          _errorMessAnh = 'Điểm không được lớn hơn 10';
-          return;
-        }
-      }
-
-      if (diemToan.isNotEmpty && diemVan.isNotEmpty && diemAnh.isNotEmpty) {
-        scoreResult = mediumScore(
-            scoreAnh: double.parse(diemToan),
-            scoreToan: double.parse(diemVan),
-            scoreVan: double.parse(diemAnh));
-        xepLoaiHocLuc =
-            xepLoai(diemTB: double.parse(scoreResult!.toStringAsFixed(2)));
-        _isShowResult = true;
       }
     });
   }
