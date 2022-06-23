@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: const EdgeInsets.only(right: 20, left: 20, top: 30),
           child: Column(
             children: [
-              InputClassWidget(
+              InputClassStateless(
                   lableText: "Điểm môn Toán",
                   hintText: "Nhập điểm toán",
                   controller: toanController,
@@ -81,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   errorText: _isErrorToan ? _errorMessToan : null),
               // Textfield : Năm sinh
-              InputClassWidget(
+              InputClassStateless(
                   lableText: "Điểm môn Văn",
                   hintText: "Nhập điểm môn văn",
                   controller: vanController,
@@ -91,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     });
                   },
                   errorText: _isErrorVan ? _errorMessVan : null),
-              InputClassWidget(
+              InputClassStateless(
                   lableText: "Điểm môn Anh",
                   hintText: "Nhập điểm môn Anh",
                   controller: anhController,

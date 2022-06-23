@@ -33,3 +33,31 @@ class _InputClassWidgetState extends State<InputClassWidget> {
         ));
   }
 }
+
+class InputClassStateless extends StatelessWidget {
+  final String lableText;
+  final String hintText;
+  final dynamic controller;
+  final dynamic errorText;
+  final Function clearMess;
+
+  const InputClassStateless({Key? key, required this.lableText, required this.hintText, this.controller, this.errorText, required this.clearMess}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: const EdgeInsets.only(top: 10, bottom: 20),
+        child: TextField(
+          onChanged: (text) {
+            clearMess();
+          },
+          decoration: InputDecoration(
+            border: const OutlineInputBorder(),
+            labelText: lableText,
+            hintText: hintText,
+            errorText: errorText,
+          ),
+          controller: controller,
+        ));
+  }
+}
